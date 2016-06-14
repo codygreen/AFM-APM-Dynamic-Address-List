@@ -155,5 +155,5 @@ exports.putRequest = function(url, args, callback) {
   });
   req.on('error', function(err) {
     console.log('request error', err);
-  })
-}
+  });
+};

@@ -3,7 +3,7 @@
  *
  */
 
-var f5 = require('./f5_api');
+var api = require('./f5_api');
 var exports = module.exports = {};
 var server = "10.128.1.128";
 var addressList = "~Common~apm_address_list";
@@ -16,7 +16,7 @@ var afmAddressListUrl = "https://"+server+"/mgmt/tm/security/firewall/address-li
   * @return {Object} data
   */
 exports.getAddressList = function(callback) {
-	f5.get(afmAddressListUrl, "", function(res) {
+	api.get(afmAddressListUrl, "", function(res) {
 	//f5.get(function(callback) {
 		callback(res.addresses);
 	});
@@ -29,10 +29,10 @@ exports.getAddressList = function(callback) {
   * @return {Object} data
   */
 exports.addAddress = function(address, callback) {
-	f5.put(afmAddressListUrl, "", address, function(res) {
+	api.put(afmAddressListUrl, "", address, function(res) {
 		callback(res.addresses);
 	});
-}
+};
 
 /**
   * delete address from address list
@@ -41,7 +41,7 @@ exports.addAddress = function(address, callback) {
   * @return {Object} data
   */
 exports.deleteAddress = function(address, callback) {
-	f5.delete(afmAddressListUrl, "", address, function(res) {
+	api.delete(afmAddressListUrl, "", address, function(res) {
 		callback(res.addresses);
 	});
-}
+};
