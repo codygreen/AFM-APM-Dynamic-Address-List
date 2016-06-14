@@ -18,7 +18,11 @@ describe("AFM/APM Dynamic Address List", function() {
 			done();
 		});
 	});
-	it("Delete address from AFM address list", function() {
-
+	it("Delete address from AFM address list", function(done) {
+		afm.deleteAddress("10.1.10.10", function(data) {
+			assert.isDefined(data);
+			expect(data).not.to.contain( {name: "10.1.10.10"} );
+			done();
+		})
 	});
 });

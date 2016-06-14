@@ -33,3 +33,15 @@ exports.addAddress = function(address, callback) {
 		callback(res.addresses);
 	});
 }
+
+/**
+  * delete address from address list
+  *
+  * @param {String} address
+  * @return {Object} data
+  */
+exports.deleteAddress = function(address, callback) {
+	f5.delete(afmAddressListUrl, "", address, function(res) {
+		callback(res.addresses);
+	});
+}

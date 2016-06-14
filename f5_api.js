@@ -6,7 +6,7 @@
 var Client = require('node-rest-client').Client;
 var winston = require('winston');
  
-winston.level = 'debug';
+winston.level = 'notice';
 var exports = module.exports = {};
 
 //ignore self signed certificate
@@ -18,21 +18,45 @@ var options_auth = {
   password: "admin"
 };
 
+/**
+ * delete key:data pair from the data group
+ *
+ * @param {String} url
+ * @param {String} request arguments
+ * @param {String} data
+ * @param {Function} callback
+ *
+ * @todo abstract this so it can handle any response from API
+ */
 
-/*var request = require('request');
-exports.get = function(callback) {
-	request({
-		url: 'https://10.128.1.128/mgmt/tm/security/firewall/address-list/~Common~apm_address_list',
-		headers: {
-			"Authorization": "Basic YWRtaW46YWRtaW4="
-		}
-	}, function (error, response, body) {
-		console.log("resonse code: ", response.statusCode);
-	  if (!error && response.statusCode == 200) {
-	    console.log(body) // Show the HTML for the Google homepage.
-	  }
-	})
-};*/
+ exports.delete = function(url, args, data, callback) {
+ 	// get the data set so we can work with it
+ 	exports.get(url, args, function(res) {
+ 		// check if the object exists
+ 		if(typeof res.addresses != 'undefined') {
+ 			var exists = false;
+ 			for (var address in res.addresses) {
+ 				if(res.addresses[address].name == data) {
+ 					winston.log('debug', 'DELETE: address found, deleting it');
+ 					res.addresses.splice(address, address+1);
+ 					exists = true;
+ 					break;
+ 				}
+ 			}
+ 			// only udpate address list if the address exists
+ 			if(exists) {
+ 				// populate the arguments for the http post 
+		      args = {  
+		        data: { addresses: res.addresses },
+		        header: { "Content-Type": "application/json" }
+		      };
+		      exports.putRequest(url, args, function (r) {
+		        callback(r);
+		      });
+ 			}
+ 		}
+ 	});
+ };
 
 /**
  * handle API GET requets
@@ -67,13 +91,13 @@ exports.get = function(url, args, callback) {
  *
  * @param {String} url
  * @param {String} request arguments
- 8 @param {String} record set 
  * @param {String} data
  * @param {Function} callback
  *
  * @todo abstract this so it can handle any response from API
  */
 exports.put = function (url, args, data, callback) {
+  // get the data set so we can work with it
   exports.get(url, args, function(res) {
   		winston.log('debug', 'PUT: addresses: ', res.addresses);
       // check if the object exists 
