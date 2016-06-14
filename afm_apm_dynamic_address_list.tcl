@@ -4,7 +4,7 @@
 
 # add the address to the address list
 when ACCESS_POLICY_COMPLETED {
-	set ilx_handle [ILX::init "afm_apm_dynamic_address_list_plugin" "dynamic_address_list"] 
+	set ilx_handle [ILX::init "dynamic_address_list_plugin" "dynamic_address_list"] 
 	# set username
     set ip_address [ACCESS::session data get session.user.clientip] 
     if {[info exists ip_address]} {
@@ -21,7 +21,7 @@ when ACCESS_POLICY_COMPLETED {
 
 # remove the address from the address list
 when ACCESS_SESSION_CLOSED {
-	set ilx_handle [ILX::init "afm_apm_dynamic_address_list_plugin" "dynamic_address_list"] 
+	set ilx_handle [ILX::init "dynamic_address_list_plugin" "dynamic_address_list"] 
 	# set username
     set ip_address [ACCESS::session data get session.user.clientip] 
     if {[info exists ip_address]} {
