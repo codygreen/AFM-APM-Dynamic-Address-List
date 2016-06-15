@@ -9,7 +9,7 @@ when ACCESS_POLICY_COMPLETED {
     set ip_address [ACCESS::session data get session.user.clientip] 
     if {[info exists ip_address]} {
 	    # create a random secret
-	    if {[catch {[ILX::call $ilx_handle "addAddress" $ip_address]} result]} {
+	    if {[catch {set res [ILX::call $ilx_handle "addAddress" $ip_address]} result]} {
 	        log local0.error "Client - [IP::client_addr], ILX failure: $result"
 	        return
 	    }
@@ -26,7 +26,7 @@ when ACCESS_SESSION_CLOSED {
     set ip_address [ACCESS::session data get session.user.clientip] 
     if {[info exists ip_address]} {
 	    # create a random secret
-	    if {[catch {[ILX::call $ilx_handle "deleteAddress" $ip_address]} result]} {
+	    if {[catch {set res [ILX::call $ilx_handle "deleteAddress" $ip_address]} result]} {
 	        log local0.error "Client - $ip_address, ILX failure: $result"
 	        return
 	    }
