@@ -21,9 +21,13 @@ Once the workspace is created you'll need to make the following code changes:
 
    ```set ilx_handle [ILX::init "plugin_name" "extension_name"]```
 
-2. SSH into your BIG-IP and nstall the node modules 
+2. Copy the contents of index.js into your workspace
+3. Add two extension files and copy the contents of those files into your workspace
+  1. f5_afm.js
+  2. f5_api.js
+4. SSH into your BIG-IP and nstall the node modules 
    ```
 cd /var/ilx/workspaces/Common/dynamic_address_list_workspace/extensions/dynamic_address_list/
 npm install node--rest-client winston --save
 ```
-3. Add the iRule to you APM Virtual Server
+5. Add the iRule to you APM Virtual Server
