@@ -1,4 +1,4 @@
-# AFM/APM Dynamic Firewall Rules
+# F5 Networks AFM/APM Dynamic Firewall Rules
 
 iRules LX code to dynamically update an AFM address list based upon APM sessions.  The code will add a user's IP address to an AFM address list once an APM access policy is completed and will remove the IP address when the access session is closed. Requires TMOS version 12.1 and APM/AFM licensing.
 
