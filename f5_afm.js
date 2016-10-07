@@ -5,7 +5,7 @@
 
 var api = require('./f5_api');
 var exports = module.exports = {};
-var server = 127.0.0.1;
+var server = "127.0.0.1";
 var addressList = "~Common~apm_address_list";
 var afmAddressListUrl = "https://"+server+"/mgmt/tm/security/firewall/address-list/"+addressList;
 
