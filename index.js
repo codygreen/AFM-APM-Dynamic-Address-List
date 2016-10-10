@@ -9,6 +9,7 @@ var afm = require('./f5_afm');
 
 /* Create a new rpc server for listening to TCL iRule calls. */
 var ilx = new f5.ILXServer();
+ilx.listen();
 
 /**
   * add address to AFM address list
