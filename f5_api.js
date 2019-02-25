@@ -48,7 +48,7 @@ var options_auth = {
  				// populate the arguments for the http post 
 		      args = {  
 		        data: { addresses: res.addresses },
-		        header: { "Content-Type": "application/json" }
+		        headers: { "Content-Type": "application/json" }
 		      };
 		      exports.putRequest(url, args, function (r) {
 		        callback(r);
@@ -127,7 +127,7 @@ exports.put = function (url, args, data, callback) {
       // populate the arguments for the http post 
       args = {  
         data: { addresses: res.addresses },
-        header: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" }
       };
       exports.putRequest(url, args, function (r) {
         callback(r);
